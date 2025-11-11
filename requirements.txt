@@ -1,0 +1,13 @@
+#
+# This is the code for requirements.txt
+#
+Flask
+Flask-SQLAlchemy
+gunicorn
+
+# For testing
+nose
+coverage
+
+# For linting
+flake8
