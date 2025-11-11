@@ -1,0 +1,58 @@
+#
+# This is the full code for .tekton/tasks.yml
+#
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test
+spec:
+  workspaces:
+    - name: source
+  params:
+    - name: image
+      description: Python image to use
+      default: python:3.9-slim
+    - name: args
+      description: Arguments to pass to nose
+      default: "-v --with-spec --spec-color --with-coverage --cover-package=service"
+  steps:
+    #
+    # This block is for Task 5
+    #
+    - name: nose
+      image: $(params.image)
+      workingDir: $(workspaces.source.path)
+      script: |
+        #!/usr/bin/env sh
+        pip install -r requirements.txt
+        pip install nose
+        nosetests $(params.args)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cleanup
+spec:
+  workspaces:
+    - name: source
+  params:
+    - name: app-name
+      description: The name of the app to cleanup
+      default: 'products-app'
+    - name: image
+      description: Image to use for cleanup
+      default: 'registry.redhat.io/openshift4/openshift-cli:latest'
+  steps:
+    #
+    # This block is for Task 4
+    #
+    - name: remove-resources
+      image: $(params.image)
+      workingDir: $(workspaces.source.path)
+      script: |
+        #!/usr/bin/env sh
+        echo "Cleaning up resources for $(params.app-name)"
+        oc delete all --selector app=$(params.app-name)
+        oc delete pvc --selector app=$(params.app-name)
+        oc delete secrets --selector app=$(params.app-name)
+        oc delete configmaps --selector app=$(params.app-name)
