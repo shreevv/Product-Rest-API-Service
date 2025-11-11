@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products RESTful Service</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Products RESTful Service</h1>
+        </div>
+
+        <p>This is the Home Page for the Products RESTful Service.</p>
+
+        <div class="table-responsive">
+          <table class="table">
+            <tr><td>Status:</td><td><span id="flash_message"></span></td></tr>
+          </table>
+        </div>
+
+        <div class="col-md-12" id="form_data">
+          <h3>Create, Retrieve, Update, and Delete a Product:</h3>
+          <div class="well">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_id">Product ID:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_id" placeholder="Enter Product ID">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_name">Name:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_name" placeholder="Enter Product Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_category">Category:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_category" placeholder="Enter Product Category (e.g., CLOTHING, FOOD)">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_price">Price:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_price" placeholder="Enter Product Price">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_available">Available:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_available" placeholder="Enter Product Availability (true or false)">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="product_description">Description:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="product_description" placeholder="Enter Product Description">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary" id="create-btn">Create</button>
+                  <button type="submit" class="btn btn-primary" id="retrieve-btn">Retrieve</button>
+                  <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
+                  <button type="submit" class="btn btn-primary" id="delete-btn">Delete</button>
+                  <button type="submit" class="btn btn-default" id="clear-btn">Clear</button>
+                </div>
+              </div>
+            </div> </div> </div> <div class="col-md-12">
+            <h3>Search for Products:</h3>
+            <div class="well">
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="search_name">Name:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="search_name" placeholder="Enter Product Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="search_category">Category:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="search_category" placeholder="Enter Product Category">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="search_available">Available:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="search_available" placeholder="Enter Product Availability (true or false)">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" id="search-btn">Search</button>
+                  </div>
+                </div>
+              </div> </div> </div>
+
+        <div class="table-responsive col-md-12">
+          <table class="table table-striped" id="search_results">
+            <thead>
+            <tr>
+                <th class="col-md-1">ID</th>
+                <th class="col-md-3">Name</th>
+                <th class="col-md-2">Category</th>
+                <th class="col-md-2">Available</th>
+                <th class="col-md-2">Price</th>
+                <th class="col-md-2">Description</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+
+        <footer>
+          <br><br>
+          <p>&copy; 2024 NYU DevOps Course</p>
+        </footer>
+    </div> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="httpsF://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+  <script type="text/javascript" src="/static/js/rest_api.js"></script>
+
+  </body>
+</html>
